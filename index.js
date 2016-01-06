@@ -15,7 +15,7 @@ export default React.createClass({
 		}),
 	},
 	render() {
-		return React.createElement('div', {ref: 'pm'})
+		return React.createElement('div', {ref: 'pm', className: this.props.className})
 	},
 	componentWillUpdate(props) {
 		if ('value' in props || 'valueLink' in props) {
