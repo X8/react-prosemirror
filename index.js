@@ -1,5 +1,7 @@
 import React from 'react'
 import {ProseMirror} from 'prosemirror/src/edit/main'
+import "prosemirror/src/menu/menubar"
+import "prosemirror/src/markdown"
 
 export default React.createClass({
 	propTypes: {
@@ -30,7 +32,9 @@ export default React.createClass({
 			('valueLink' in this.props && this.props.valueLink.value) ||
 			this.props.defaultValue
 
-		this.pm = new ProseMirror(Object.assign({doc: this._lastValue}, this.props.options))
+		const options = Object.assign({ doc: '' }, this.props.options)
+		this.pm = new ProseMirror(options)
+		this.pm.setContent(this._lastValue, this.props.options.docFormat)
 	},
 	componentDidMount() {
 		this.refs.pm.appendChild(this.pm.wrapper)
@@ -56,4 +60,3 @@ export default React.createClass({
 		return this.pm.getContent(type)
 	},
 })
-

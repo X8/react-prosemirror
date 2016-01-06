@@ -27,19 +27,40 @@ const Hello = React.createClass({
 
 Until published to NPM, you can clone this repo or run:
 ```sh
-npm install git+git@github.com:tgecho/react-prosemirror.git
+npm install git+git@github.com:X8/react-prosemirror.git
 ```
 
 react-prosemirror and ProseMirror are both written in ES6, so you'll need some sort of transpiler such as [Babel](https://babeljs.io/) (bug reports/pull requests for other transpilers are welcome!). In Webpack, it's typical to make Babel ignore `node_modules` to improve performance using a loader definition such as:
 
 ```js
-{test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel'},
+{
+  test: /\.jsx?$/,
+  exclude: /node_modules/,
+  loader: 'babel'
+},
 ```
 
 To enable Babel for both libraries, you can add another loader like the following:
 ```js
-{test: /\.jsx?$/, include: /prosemirror/, loader: 'babel'},
+{
+  test: /\.jsx?$/,
+  include: /prosemirror/,
+  loader: 'babel'
+},
 ```
+
+Also to enable JSON, you can add another loader like the following:
+```js
+{
+  test: /\.json?$/,
+  loader: 'json'
+}
+```
+And add `json-loader` to your dependencies:
+```sh
+  npm install json-loader --save-dev
+```
+
 
 If you're using Babel 6, you'll need at least the "es2015" preset.
 
@@ -68,11 +89,10 @@ Finally, instances have a `getContent` method which defaults to the selected `do
 
 ### Options
 
-react-prosemirror simply passes options into ProseMirror. It will not automatically load other modules. For example, if you wish to use the `menubar` option or `markdown` format, you'll need to import those modules in addition to adding the appropriate options.
+react-prosemirror simply passes options into ProseMirror. It will not automatically load other modules. For example, if you wish to use the `menubar` option or `markdown` format, you'll need to import those modules in this repo `index.js` in addition to adding the appropriate options.
 
 ```js
-import 'prosemirror/src/parse/markdown'
-import 'prosemirror/src/serialize/markdown'
+import 'prosemirror/src/markdown'
 import 'prosemirror/src/menu/menubar'
 ```
 
